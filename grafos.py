@@ -110,7 +110,7 @@ graph = {
 }
 
 #Buses routes
-satelite = ['AugustoMontenegro', 'Entroncamento', 'Bosque', 'AntonioBaena', 'CasteloBranco', 'CasteloBranco', 'JoseBonifacio', 'UFPA']
+satelite = ['AugustoMontenegro', 'Entroncamento', 'Bosque', 'AntonioBaena', 'CasteloBranco', 'JoseBonifacio', 'IgarapeMiri', 'UFPA']
 cn6 = ['AugustoMontenegro', 'Entroncamento', 'Bosque', 'Perimetral', 'UFPA']
 icoaraci = ['AugustoMontenegro', 'PA_Cabral', 'Dr_Freitas', 'Bosque', 'Perimetral', 'UFPA']
 
@@ -130,15 +130,22 @@ def getIndexInitStop(startPoint, endPoint, route):
     return (start, end)
 
 
-def calculateRote(startPoint, endPoint, route):
+def calcRoute(startPoint, endPoint, route, shift):
     if(validPoints(startPoint, endPoint, route)):
         (start,end) = getIndexInitStop(startPoint, endPoint, route)
         route = route[start:end+1] #slicing just part that contains bus route
         print(route)
-        for i in range(0,len(route)-1):
-            print(graph[route[i]][route[i+1]])
-            #print(route.index(route[i+1])-1)
-            #print(graph[route[i]][0]['pounds'][0])
-            #print (graph[route[i]])
+        #defining shift, works as a switch/case 
+        poundIndex = {
+            'morning': 0,
+            'afternoon': 1,
+            'night': 2
+        }[shift] # default value is 0
 
-calculateRote('AugustoMontenegro', 'UFPA', cn6)
+        #Sum all route pounds
+        pound = 0
+        for i in range(0,len(route)-1):
+            pound += graph[route[i]][route[i+1]]['pounds'][poundIndex]
+        return pound
+
+print(calcRoute('AugustoMontenegro', 'UFPA', icoaraci, 'afternoon'))
