@@ -1,133 +1,112 @@
 #! /usr/bin/python
 
 graph = {
-    'AugustoMontenegro' : [
-        {
-            'connection' : 'Entroncamento',
+    'AugustoMontenegro' : {
+        'Entroncamento' : {
             'name' : 'Entroncamento',
             'pounds' : [10,20,30] #Morning, afternoon and night
         },
-        {
-            'connection' : 'PA_Cabral',
+        'PA_Cabral':{
             'name': 'Pedro Álvares Cabral',
             'pounds': [10,20,30]
         }
-    ],
-    'Entroncamento' : [
-        {
-            'connection' : 'Bosque',
+    },
+    'Entroncamento' : {
+        'Bosque' : {
             'name': 'Bosque',
             'pounds': [10,20,30]
         }
-    ],
-    'PA_Cabral' : [
-        {
-            'connection' : 'Dr_Freitas',
+    },
+    'PA_Cabral' : {
+        'Dr_Freitas' : {
             'name' : 'Dr. Freitas',
             'pounds' : [10,20,30]
         }
-    ],
-    'Bosque' : [
-        {
-            'connection' : 'Perimetral',
+    },
+    'Bosque' : {
+        'Perimetral' : {
             'name' : "Perimetral",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'Dr_Freitas',
+        'Dr_Freitas' : {
             'name' : "Dr. Freitas",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'AntonioBaena',
+        'AntonioBaena' : {
             'name' : "Antônio Baena",
             'pounds' : [10,20,30]
         }
-    ],
-    'Dr_Freitas' : [
-        {
-            'connection' : 'Bosque',
+    },
+    'Dr_Freitas' : {
+        'Bosque' : {
             'name' : "Bosque",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'PA_Cabral',
+        'PA_Cabral' : {
             'name' : "Pedro Álvares Cabral",
             'pounds' : [10,20,30]
         }
-    ],
-    'AntonioBaena' : [
-        {
-            'connection' : 'Bosque',
+    },
+    'AntonioBaena' : {
+        'Bosque' : {
             'name' : "Bosque",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'CasteloBranco',
+        'CasteloBranco' : {
             'name' : "Castelo Branco",
             'pounds' : [10,20,30]
         }
-    ],
-    'CasteloBranco' : [
-        {
-            'connection' : 'AntonioBaena',
+    },
+    'CasteloBranco' : {
+        'AntonioBaena' : {
             'name' : "Antônio Baena",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'JoseBonifacio',
+        'JoseBonifacio' : {
             'name' : "José Bonifácio",
             'pounds' : [10,20,30]
         }
-    ],
-    'JoseBonifacio' : [
-        {
-            'connection' : 'IgarapeMiri',
+    },
+    'JoseBonifacio' : {
+        'IgarapeMiri' : {
             'name' : "Barão Igarapé Mirí",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'CasteloBranco',
+        'CasteloBranco' : {
             'name' : "Castelo Branco",
             'pounds' : [10,20,30]
         }
-    ],
-    'IgarapeMiri' : [
-        {
-            'connection' : 'UFPA',
+    },
+    'IgarapeMiri' : {
+        'UFPA' : {
             'name' : "UFPA",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'JoseBonifacio',
+        'JoseBonifacio' : {
             'name' : "José Bonifácio",
             'pounds' : [10,20,30]
         }
-    ],
-    'Perimetral' : [
-        {
-            'connection' : 'UFPA',
+    },
+    'Perimetral' : {
+        'UFPA' : {
             'name' : "UFPA",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'Bosque',
+        'Bosque' : {
             'name' : "Bosque",
             'pounds' : [10,20,30]
         }
-    ],
-    'UFPA' : [
-        {
-            'connection' : 'IgarapeMiri',
+    },
+    'UFPA' : {
+        'IgarapeMiri' : {
             'name' : "Barão de Igarapé Mirí",
             'pounds' : [10,20,30]
         },
-        {
-            'connection' : 'Perimetral',
+        'Perimetral' : {
             'name' : "Perimetral",
             'pounds' : [10,20,30]
         }
-    ]
+    }
 }
 
 #Buses routes
@@ -157,7 +136,7 @@ def calculateRote(startPoint, endPoint, route):
         route = route[start:end+1] #slicing just part that contains bus route
         print(route)
         for i in range(0,len(route)-1):
-            print(graph[route[i]][route.index(route[i+1])])
+            print(graph[route[i]][route[i+1]])
             #print(route.index(route[i+1])-1)
             #print(graph[route[i]][0]['pounds'][0])
             #print (graph[route[i]])
