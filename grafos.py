@@ -1,4 +1,5 @@
 #! /usr/bin/python
+# -*- coding: utf-8 -*-
 
 graph = {
     'AugustoMontenegro' : {
@@ -129,12 +130,39 @@ def getIndexInitStop(startPoint, endPoint, route):
     end = route.index(endPoint)
     return (start, end)
 
+def route(startPoint, endPoint, shift):
+    ico_route = calcRoute(startPoint, endPoint, icoaraci, shift)
+    sat_route = calcRoute(startPoint, endPoint, satelite, shift)
+    cn6_route = calcRoute(startPoint, endPoint, cn6, shift) 
+
+    smaller_route = [ico_route,sat_route,cn6_route]
+    if(min(smaller_route)<0):
+        num_list = [item for item in smaller_route if item >= 0]
+        for i in range(0,len(num_list)):
+            if(num_list[i] == sat_route):
+                name = 'Satélite UFPA (707)'
+            elif(num_list[i] == cn6_route):
+                name = 'Cidade Nova 6 (321)'
+            else:
+                name = 'Icoaraci UFPa (305)'
+        return name,min(num_list)
+    else:
+        for i in range(0,len(smaller_route)):
+            if(smaller_route[i] == sat_route):
+                name = 'Satélite UFPA (707)'
+            elif(smaller_route[i] == cn6_route):
+                name = 'Cidade Nova 6 (321)'
+            else:
+                name = 'Icoaraci UFPa (305)'
+   
+    return min(smaller_route)
+
 
 def calcRoute(startPoint, endPoint, route, shift):
     if(validPoints(startPoint, endPoint, route)):
         (start,end) = getIndexInitStop(startPoint, endPoint, route)
         route = route[start:end+1] #slicing just part that contains bus route
-        print(route)
+        #print(route)
         #defining shift, works as a switch/case 
         poundIndex = {
             'morning': 0,
@@ -146,6 +174,11 @@ def calcRoute(startPoint, endPoint, route, shift):
         pound = 0
         for i in range(0,len(route)-1):
             pound += graph[route[i]][route[i+1]]['pounds'][poundIndex]
+        return pound,route
+    else:
+        pound = -1
         return pound
 
-print(calcRoute('AugustoMontenegro', 'UFPA', icoaraci, 'afternoon'))
+#print(calcRoute('AugustoMontenegro', 'UFPA', icoaraci, 'afternoon'))
+
+print(route('AugustoMontenegro','UFPA','afternoon'))
