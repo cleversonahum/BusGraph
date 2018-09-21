@@ -155,7 +155,7 @@ def route(startPoint, endPoint, shift):
             else:
                 name = 'Icoaraci UFPa (305)'
    
-    return min(smaller_route)
+    return name, min(smaller_route)
 
 
 def calcRoute(startPoint, endPoint, route, shift):
